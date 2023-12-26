@@ -12,6 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../style.css" />
 </head>
 <body>
 <h1>Department List</h1>
@@ -31,5 +32,6 @@
 			<%}%>
 		</tbody>
 	</table>
+	<a href="./add.jsp">추가하기</a>
 </body>
 </html>

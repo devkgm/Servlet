@@ -3,6 +3,7 @@ package com.devkim.app.regions;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,41 @@ import java.util.List;
 import com.devkim.app.util.DBConnector;
 
 public class RegionDAO {
+	
+	public int update(RegionDTO dto) throws Exception{
+		Connection con = DBConnector.getConnector();
+		String sql = "UPDATE REGIONS SET REGION_NAME = ? WHERE REGION_ID = ?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setInt(2, dto.getREGION_ID());
+		st.setString(1, dto.getREGION_NAME());
+		int result = st.executeUpdate();
+		
+		DBConnector.disConnect(st, con);
+		return result;
+	}
+	
+	public int delete(RegionDTO dto) throws Exception{
+		Connection con = DBConnector.getConnector();
+		String sql = "DELETE FROM REGIONS WHERE REGION_ID = ?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setInt(1, dto.getREGION_ID());
+		int result = st.executeUpdate();
+		DBConnector.disConnect(st, con);
+		return result;
+	}
+	
+	public int add(RegionDTO dto) throws SQLIntegrityConstraintViolationException, Exception{
+		Connection con = DBConnector.getConnector();
+		String sql = "INSERT INTO REGIONS (REGION_ID, REGION_NAME) VALUES (?,?)";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setInt(1, dto.getREGION_ID());
+		st.setString(2, dto.getREGION_NAME());
+		int result = st.executeUpdate();
+		DBConnector.disConnect( st, con);
+		return result;
+		
+	}
+	
 	public List<RegionDTO> getList() throws Exception{
 //		db접속 후 부서 테입블의 모든 정보를 출력
 

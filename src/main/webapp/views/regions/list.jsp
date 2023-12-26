@@ -13,6 +13,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../style.css" />
 </head>
 <body>
 	<h1>Regions List</h1>
@@ -32,6 +33,9 @@
 			<%}%>
 		
 		</tbody>
+		
+	
 	</table>
+	<a href="./add.jsp">대륙추가</a>
 </body>
 </html>

@@ -20,5 +20,8 @@
 	<h1>Region Detail</h1>
 	<%= regionDTO.getREGION_ID() %>
 	<%= regionDTO.getREGION_NAME() %>
+	<a href="./update.jsp?id=<%= regionDTO.getREGION_ID() %>&name=<%= regionDTO.getREGION_NAME() %>">수정하기</a>
+	<a href="./deleteProcess.jsp?id=<%= regionDTO.getREGION_ID() %>">삭제하기</a>
+	
 </body>
 </html>

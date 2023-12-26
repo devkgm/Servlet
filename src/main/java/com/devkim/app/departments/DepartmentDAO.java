@@ -9,6 +9,45 @@ import java.util.List;
 import com.devkim.app.util.DBConnector;
 
 public class DepartmentDAO {
+	public int update(DepartmentDTO dto) throws Exception{
+		Connection con = DBConnector.getConnector();
+		String sql = "UPDATE DEPARTMENTS SET DEPARTMENT_NAME=?, LOCATION_ID=? WHERE DEPARTMENT_ID = ?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setInt(3, dto.getDEPARTMENT_ID());
+		st.setString(1, dto.getDEPARTMENT_NAME());
+		
+
+		st.setInt(2, dto.getLOCATION_ID());
+		int result = st.executeUpdate();
+		
+		DBConnector.disConnect(st, con);
+		return result;
+	}
+	
+	public int delete(DepartmentDTO dto) throws Exception{
+		Connection con = DBConnector.getConnector();
+		String sql = "DELETE FROM DEPARTMENTS WHERE DEPARTMENT_ID = ?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setInt(1, dto.getDEPARTMENT_ID());
+		int result = st.executeUpdate();
+		DBConnector.disConnect(st, con);
+		return result;
+	}
+	
+	public int add(DepartmentDTO dto) throws Exception{
+		Connection con = DBConnector.getConnector();
+		String sql = "INSERT INTO DEPARTMENTS VALUES (?,?,?,?)";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setInt(1, dto.getDEPARTMENT_ID());
+		st.setString(2, dto.getDEPARTMENT_NAME());
+		st.setInt(3, dto.getMANAGER_ID());
+		st.setInt(4, dto.getLOCATION_ID());
+		int result = st.executeUpdate();
+		
+		DBConnector.disConnect(st, con);
+		return result;
+	}
+	
 	public List<DepartmentDTO> getList() throws Exception{
 		List<DepartmentDTO> dtoList = new ArrayList<DepartmentDTO>();
 		Connection connection = DBConnector.getConnector();
